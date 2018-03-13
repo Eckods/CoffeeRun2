@@ -17,33 +17,11 @@
       console.log(serverResponse);
     });
 
-  /*  $.ajax(this.serverUrl, {
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify({
-        coffee: $('#coffeeOrder'),
-        emailAddress: $('#emailInput'),
-        flavor: $('#flavorShot'),
-        size: coffeeOrder.size,
-        strength: $('#strengthLevel')
-      }),
-      success: function(serverResponse) {
-        console.log(serverResponse);
-      },
-      error: function(serverResponse){
-        console.log(serverResponse);
-      }
-    });*/
   };
 
   RemoteDataStore.prototype.getAll = function (cb) {
     // Retrieve/get all records from server
     // and print the server response
-  /*  $.get(this.serverUrl, function (serverResponse) {
-      console.log(serverResponse);
-      // Orders passed to this callback function
-      cb(serverResponse);
-    });*/
     $.ajax(this.serverUrl, {
       type: "GET",
       success: function(serverResponse) {
@@ -58,33 +36,19 @@
   RemoteDataStore.prototype.get = function (key, cb) {
     // Retrieve/get a specific order from server
     // and print the server response
-  /*  $.get(this.serverUrl + '/' + key, function (serverResponse) {
-      console.log(serverResponse);
-      cb(serverResponse);
-    });*/
-/*      type: "GET",
+    $.ajax({
+      url: this.serverUrl + '?emailAddress=' + key,
+      type: "GET",
       success: function(serverResponse) {
-      }
-        var data = $(serverResponse).find('#emailAddress').text();
-        console.log(data.emailAddress);
-
+        console.log(serverResponse);
       },
       error: function(serverResponse){
         console.log(serverResponse);
       }
-    });
-*/
   };
 
   RemoteDataStore.prototype.remove = function (key) {
     // Remove a specific order from server
-/*    $.ajax(this.serverUrl + '/' + key, {
-      type: 'DELETE'
-    });
-*/
-  /*  var data = GET /this.serverUrl?{"emailAddress" : key}
-    console.log(data.id);
-    */
     var tempUrl = this.serverUrl;
 
     $.ajax({
@@ -93,12 +57,14 @@
       success: function(serverResponse) {
         console.log(serverResponse);
         $.ajax({
-              url: tempUrl + '/' + $(serverResponse).attr('id'),
-              type: 'DELETE'
-            });
+          url: tempUrl + '/' + $(serverResponse).attr('id'),
+          type: 'DELETE'
+        });
+      },
+      error: function(serverResponse){
+        console.log(serverResponse);
       }
     });
-
   }
 
   App.RemoteDataStore = RemoteDataStore;
