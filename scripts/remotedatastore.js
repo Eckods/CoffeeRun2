@@ -45,7 +45,8 @@
       error: function(serverResponse){
         console.log(serverResponse);
       }
-  };
+    });
+  }
 
   RemoteDataStore.prototype.remove = function (key) {
     // Remove a specific order from server
