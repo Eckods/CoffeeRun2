@@ -22,14 +22,9 @@
   RemoteDataStore.prototype.getAll = function (cb) {
     // Retrieve/get all records from server
     // and print the server response
-    $.ajax(this.serverUrl, {
-      type: "GET",
-      success: function(serverResponse) {
-        console.log(serverResponse);
-      },
-      error: function(serverResponse){
-        console.log(serverResponse);
-      }
+    $.get(this.serverUrl, function (serverResponse) {
+      console.log(serverResponse);
+      cb(serverResponse);
     });
   };
 
