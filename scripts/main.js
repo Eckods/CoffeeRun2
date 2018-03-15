@@ -25,9 +25,9 @@
   formHandler.addInputHander(Validation.isCompanyEmail);
   console.log(formHandler);
 
-  remoteDS.getAll(function(coffeeOrders){
-    for(var i = 0; i < coffeeOrders.length; i++){
-      checkList.addRow(coffeeOrders[i]);
+  remoteDS.getAll(function(existingOrders){
+    for(var i = 0; i < existingOrders.length; i++){
+      checkList.addRow(existingOrders[i]);
     }
   });
 
